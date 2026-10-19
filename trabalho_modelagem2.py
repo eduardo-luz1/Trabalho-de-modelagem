@@ -1,15 +1,21 @@
+"""
+Esse é o codigo do trabalho de modelagem computacional
+Alunos:
+Eduardo Luz Badini Padilha
+Tayna Ank
+"""
 import numpy as np
 
 pi = np.pi
 rho = 1e4
 
-def f(r, h):
+def f(r, h): #função f(r, h) = 350pi*r^2 + 200pi*r*h
     return 350*pi*r**2 + 200*pi*r*h
 
-def g(r, h):
+def g(r, h): #função g(r, h) = 500 - pi*r^2*h
     return 500 - pi*r**2*h
 
-def P(r, h):
+def P(r, h): #função P(r, h) = f(r,h) + 10^4*max(0,g(r,h))^2
     excesso = max(0.0, g(r, h))
     return f(r, h) + rho*excesso**2
 
@@ -32,6 +38,7 @@ alpha_inicial = 1e-6
 tolerancia = 1e-7
 max_iter = 1000000
 
+#Loops para chegar ao valor final
 for i in range(max_iter):
     dr, dh = gradiente_P(r, h)
     norma = np.hypot(dr, dh)
@@ -57,7 +64,7 @@ for i in range(max_iter):
         break
 
     r, h = r_novo, h_novo
-
+#prints para saber todas as informações do codigo
 print(f"Iterações: {i}")
 print(f"r = {r:.8f}")
 print(f"h = {h:.8f}")
